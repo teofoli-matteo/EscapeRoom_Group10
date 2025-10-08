@@ -36,6 +36,11 @@ class Game:
                         else:
                             print("Where are you going ?")
                 elif action == 'inventory': print(self.player.show_inventory())
+                elif action == "inspect":
+                    if args:
+                        print(self.current_room.inspect(args[0], self.player))
+                    else:
+                        print("Inspect what ?")
                 else:
                     print("Unknown command.")
             except KeyboardInterrupt:
