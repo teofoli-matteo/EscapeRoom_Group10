@@ -9,9 +9,9 @@ class SocTriageRoom(BaseRoom):
             ["auth.log"]
         )
 
-    def inspect(self, item, player):
+    def inspect(self, item, player, logger):
         if item != "auth.log": return f"No item named: {item}"
-        
+        logger.log("[Room SOC] Parsing auth.log...")
         try:
             with open("data/auth.log") as file:
                 lines = file.readlines()
@@ -49,5 +49,16 @@ class SocTriageRoom(BaseRoom):
         
         token_value = f"{last_octet}{top_count}"
         player.add_token("KEYPAD", token_value)
+        
+        logger.log(f"{top_count} failed attempts found in {top_subnet}")
+        logger.log(f"Top IP is {top_ip} (last octet={last_octet})")
+        logger.log(f"Token formed: {token_value}")
+        logger.log(f"TOKEN[KEYPAD]={token_value}")
+        logger.log(f"EVIDENCE[KEYPAD].TOP24={top_subnet}")
+        logger.log(f"EVIDENCE[KEYPAD].COUNT={top_count}")
+        if sample_line:
+            logger.log(f"EVIDENCE[KEYPAD].SAMPLE={sample_line}")
+        logger.log(f"EVIDENCE[KEYPAD].MALFORMED_SKIPPED={malformed_lines}")
+
         
         return f"token: {token_value}"
