@@ -3,13 +3,15 @@ import sys
 from engine.player import Player
 from rooms.lobby import Lobby
 from rooms.soc_triage import SocTriageRoom
+from rooms.dns_closet_room import DnsClosetRoom
 from engine.logger import Logger
 
 class Game:
     def __init__(self, starting_room="baseroom", transcript="run.txt"):
         self.rooms = {
             "intro": Lobby(),
-            "soc": SocTriageRoom()
+            "soc": SocTriageRoom(),
+            "dns": DnsClosetRoom()
         }
         self.current_room = self.rooms.get(starting_room, Lobby())
         self.player = Player()
