@@ -1,4 +1,3 @@
-from importlib.resources import contents
 from .base_room import BaseRoom
 import re
 
@@ -9,41 +8,44 @@ class VaultCorridorRoom(BaseRoom):
             "A dark corridor full of random SAFE codes. Only one is valid.",
             ["vault_dump.txt"]
              )
-        self.safe_regex =  re.compile(r'SAFE\{\s*(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s*\}')
+        self.safe_regex =  re.compile(r"SAFE\{\s*(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s*\}",
+                                      re.IGNORECASE)
+ 
         
-        def inspect(self, item, player, logger):
-            if item != "vault_dump.txt": 
-                return f"No such item: {item}"
+    def inspect(self, item, player, logger):
+        if item != "vault_dump.txt": 
+            return f"No such item: {item}"
             
-            try:
-                with open("data/vault_dump.txt", "r") as f:
+        try:
+            with open("data/vault_dump.txt", "r") as f:
                  content = f.read() 
-            except FileNotFoundError:
-                return "Error:vault_dump.txt not found in data folder."
+        except FileNotFoundError:
+            return "Error:vault_dump.txt not found in data folder."
             
-            matches = self.safe_regex.findall(content)
+        matches = self.safe_regex.findall(content)
             
-            valid_token = None
+        valid_token = None
+        evidence_match = None
+        evidence_check = None
             
-            for match in matches:
-                a, b, c = int(match[0]),
-                int(match[1]), int(match[2])
+        for a_str, b_str, c_str in matches:
+            a, b, c = int(a_str), int(b_str), int(c_str)
                 
-                if a + b == c:
-                    valid_token = f"SAFE{{{a}--{b}--{c}}}"
-                    match_str = f"SAFE{{{a}--{b}--{c}}}"
-                    check_expr = f"{a} + {b} == {c}"
-                    break
                 
-                if valid_token is None:
-                    return "No valid SAFE code found."
+            if a + b == c:
+                valid_token = f"SAFE{{{a}--{b}--{c}}}"
+                match_str = f"SAFE{{{a}--{b}--{c}}}"
+                check_expr = f"{a} + {b} == {c}"
+                break
                 
-                player.add_token("SAFE", valid_token)
+        if valid_token is None:
+            return "No valid SAFE code found."
                 
-                logger.info(f"valid token found: {valid_token}")
-                logger.info(f"Matched string: {match_str}")
-                logger.info(f"Validation check: {check_expr}")
+        player.add_token("SAFE", valid_token)
                 
-                return f"Token extracted: {valid_token}"
+        logger.log(f"valid token found: {valid_token}")
+        logger.log(f"Matched string: {match_str}")
+        logger.log(f"Validation check: {check_expr}")        
+        return f"Token extracted: {valid_token}"
             
             

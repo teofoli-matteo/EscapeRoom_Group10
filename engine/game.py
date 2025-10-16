@@ -4,6 +4,7 @@ from engine.player import Player
 from rooms.lobby import Lobby
 from rooms.soc_triage import SocTriageRoom
 from rooms.dns_closet_room import DnsClosetRoom
+from rooms.vault_corridor_room import VaultCorridorRoom
 from engine.logger import Logger
 
 class Game:
@@ -11,7 +12,8 @@ class Game:
         self.rooms = {
             "intro": Lobby(),
             "soc": SocTriageRoom(),
-            "dns": DnsClosetRoom()
+            "dns": DnsClosetRoom(),
+            "vault": VaultCorridorRoom()
         }
         self.current_room = self.rooms.get(starting_room, Lobby())
         self.player = Player()
