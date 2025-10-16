@@ -1,3 +1,4 @@
+from importlib.resources import contents
 from .base_room import BaseRoom
 import re
 
@@ -17,8 +18,8 @@ class VaultCorridorRoom(BaseRoom):
                 return f"No such item: {item}"
             
             try:
-                with open("data/vault_dump.txt", "r")
-                content = f.read()
+                with open("data/vault_dump.txt", "r") as f:
+                 content = f.read() 
             except FileNotFoundError:
                 return "Error:vault_dump.txt not found in data folder."
             
@@ -31,10 +32,8 @@ class VaultCorridorRoom(BaseRoom):
                 int(match[1]), int(match[2])
                 
                 if a + b == c:
-                    valid_token = 
-                    f"SAFE{{{a}--{b}--{c}}}"
-                    match_str =
-                    f"SAFE{{{a}--{b}--{c}}}"
+                    valid_token = f"SAFE{{{a}--{b}--{c}}}"
+                    match_str = f"SAFE{{{a}--{b}--{c}}}"
                     check_expr = f"{a} + {b} == {c}"
                     break
                 
@@ -43,7 +42,7 @@ class VaultCorridorRoom(BaseRoom):
                 
                 player.add_token("SAFE", valid_token)
                 
-                logger.info(f"valid token found: {Valid_token}")
+                logger.info(f"valid token found: {valid_token}")
                 logger.info(f"Matched string: {match_str}")
                 logger.info(f"Validation check: {check_expr}")
                 
