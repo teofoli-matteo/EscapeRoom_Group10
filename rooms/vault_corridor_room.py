@@ -6,12 +6,10 @@ class VaultCorridorRoom(BaseRoom):
     def __init__(self):
         super().__init__(
             "VaultCorridor", 
-            "A dark corridor full of random SAFE codes. Only one is valid."
-            ["Vault_dump.txt"]
+            "A dark corridor full of random SAFE codes. Only one is valid.",
+            ["vault_dump.txt"]
              )
-        
-        self.safe_regex
-        re.compile(r'SAFE\{\s*(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s*\}')
+        self.safe_regex =  re.compile(r'SAFE\{\s*(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s*\}')
         
         def inspect(self, item, player, logger):
             if item != "vault_dump.txt": 
