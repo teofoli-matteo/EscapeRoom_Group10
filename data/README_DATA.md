@@ -11,5 +11,5 @@ Files:
 
 Notes:
 - Inputs contain noise and small format issues by design. Handle errors gracefully.
-- No external api calls, use built-in Python libraries
+- No network calls; use built-in Python libraries.
 - Final gate: read final_gate.txt and follow project specs

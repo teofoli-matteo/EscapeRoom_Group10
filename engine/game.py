@@ -1,4 +1,5 @@
 import sys
+import json
 
 from engine.player import Player
 from rooms.lobby import Lobby
@@ -50,6 +51,38 @@ class Game:
                         print(self.current_room.inspect(args[0], self.player, self.logger))
                     else:
                         print("Inspect what ?")
+                elif action == "save":
+                    if args:
+                        filename = args[0]
+                        state = {
+                            "current_room": self.current_room.name,
+                            "inventory": self.player.inventory
+                        }
+                        try:
+                            with open(filename, "w") as f:
+                                json.dump(state, f, indent=4)
+                            print(f"[Game] Progress saved.")
+                        except Exception as e:
+                            print(f"[Game] Failed to save: {e}")
+                    else:
+                        print("Specify filename to save.")
+                        
+                elif action == "load":
+                    if args:
+                        filename = args[0]
+                        try:
+                            with open(filename, "r") as f:
+                                state = json.load(f)
+                            room_name = state.get("current_room", "intro")
+                            self.current_room = self.rooms.get(room_name, Lobby())
+                            self.player.inventory = state.get("inventory", {})
+                            print(f"[Game] Progress loaded from {filename}.")
+                        except FileNotFoundError:
+                            print(f"[Game] Save file not found: {filename}")
+                        except Exception as e:
+                            print(f"[Game] Failed to load: {e}")
+                    else:
+                        print("Specify filename to load.")
                 else:
                     print("Unknown command.")
             except KeyboardInterrupt:
