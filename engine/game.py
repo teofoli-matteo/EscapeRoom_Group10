@@ -7,6 +7,7 @@ from rooms.soc_triage import SocTriageRoom
 from rooms.dns_closet_room import DnsClosetRoom
 from rooms.vault_corridor_room import VaultCorridorRoom
 from rooms.malware_room import MalwareLabRoom
+from rooms.final_gate import FinalRoom
 from engine.logger import Logger
 
 class Game:
@@ -16,7 +17,8 @@ class Game:
             "soc": SocTriageRoom(),
             "dns": DnsClosetRoom(),
             "vault": VaultCorridorRoom(),
-            "malware": MalwareLabRoom()
+            "malware": MalwareLabRoom(),
+            "final": FinalRoom(),
         }
         self.current_room = self.rooms.get(starting_room, Lobby())
         self.player = Player()
@@ -83,6 +85,10 @@ class Game:
                             print(f"[Game] Failed to load: {e}")
                     else:
                         print("Specify filename to load.")
+                        
+                elif action == "use":
+                    if args:
+                        print(self.current_room.use(args[0], self.player, self.logger))
                 else:
                     print("Unknown command.")
             except KeyboardInterrupt:
