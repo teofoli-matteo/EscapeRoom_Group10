@@ -2,7 +2,7 @@
 **Teofoli Matteo**  
 Contributions: `Player`, `Game Engine`, `Logger`, `Lobby`, `SOC Room`, and `Final Gate Room`.\
 **Nwaoyibo Chiamaka**  
-Contributions: Please add your contribution here.\
+Contributions: `Game`, `Vault Corridor`, and `Malware Room`, 
 **Kong Phil**  
 Contributions: Please add your contribution here.
 
@@ -48,6 +48,13 @@ Serves as the central hub.
 - Groups them by `/24` subnet and counts occurrences.
 - Finds the subnet and IP with the most failures.
 - Generates a token based on: `token = last_octet_of_top_IP + total_failures`
+
+### 6) `Vault Corridor Room` - Vault Dump Analysis 
+**File:** `rooms/vault_corridor_room.py`
+#### Logic
+- Precompiled a regex pattern that captures SAFE{a-b-c}
+- parsed the vault_dump.txt file to find all safe code candidates
+- Validates safe codes with checksum verification
 
 ### III. Team Work
 In order to work efficiently, we decided to create a **Discord** group. The purpose of this group is to discuss problems and solutions, but also to distribute tasks to each member and ensure follow-up for successful collaboration.
