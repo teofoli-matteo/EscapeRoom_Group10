@@ -1,8 +1,12 @@
-from .base_room import BaseRoom
-
+"""
+dns_closet_room.py:
+Decode DNS hints and recover the DNS token.
+"""
 import base64
+from base_room import BaseRoom
 
 class DnsClosetRoom(BaseRoom):
+    """Room logic for decoding DNS hints."""
     def __init__(self):
         super().__init__(
             "Dns Closet",
@@ -11,6 +15,7 @@ class DnsClosetRoom(BaseRoom):
         )
 
     def _safe_b64decode(self, val: str) -> str:
+        """Decode Base64 while tolerating padding/newline issues."""
         val = val.replace("\\\n", "").strip()
 
         missing = len(val) % 4
@@ -23,17 +28,28 @@ class DnsClosetRoom(BaseRoom):
             return None
 
     def inspect(self, item, player, logger):
+        """
+        Inspect the given item and extract a token from a DNS zone fragment.
+
+        Args:
+            item (str): The name of the item to inspect (dns.cfg).
+            player (Player): The player instance to store the token in.
+            logger (Logger): The logger instance for recording actions.
+
+        Returns:
+            str: A message indicating the result of the inspection.
+        """
         if item != "dns.cfg":
             return f"No such item: {item}."
-        
+
         logger.log("[Room DNS] Decoding hints...")
-        
+
         try:
-            with open("./data/dns.cfg") as file:
+            with open("./data/dns.cfg", encoding="UTF-8") as file:
                 lines = file.readlines()
         except FileNotFoundError:
             return '"dns.cfg" can not be found.'
-        
+
         token_key = None
         hints = {}
 
@@ -61,7 +77,7 @@ class DnsClosetRoom(BaseRoom):
 
         if not token_key or token_key not in hints:
             return "No valid token found in dns.cfg."
-        
+
         decoded_line = hints[token_key].strip()
         token_word = decoded_line.split()[-1]
 

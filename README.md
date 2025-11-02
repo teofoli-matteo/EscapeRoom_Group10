@@ -4,7 +4,7 @@ Contributions: `Player`, `Game Engine`, `Logger`, `Lobby`, `SOC Room`, and `Fina
 **Nwaoyibo Chiamaka**  
 Contributions: `Game`, `Vault Corridor`, and `Malware Room`, 
 **Kong Phil**  
-Contributions: Please add your contribution here.
+Contributions: `Game`, `Base Room`, `DNS Closet Room` and `Malware Room`.
 
 ## II. Implemented Components
 ### 1) `Player` – Token Inventory Manager
@@ -55,6 +55,21 @@ Serves as the central hub.
 - Precompiled a regex pattern that captures SAFE{a-b-c}
 - parsed the vault_dump.txt file to find all safe code candidates
 - Validates safe codes with checksum verification
+
+### 7) `DNS Closet Room` - Base64 Decode Challenge
+**File:** `rooms/dns_closet_room.py`
+#### Logic
+- Parse a `key-value` file.
+- Deal with stray newlines and missing padding.
+- Decode value as Base64 and log the decoded hint text.
+
+### 8) `Malware Lab Room` - Process Tree Forensics
+**File:** `rooms/malware_room.py`
+#### Logic
+- Load the process tree from `proc_tree.jsonl`
+- Build an adjacency children map `children[ppid] -> list[pid]`
+- Run DFS first, then BFS, to find a path from the starting PID to any process running `curl` or `scp`.
+- Log the path and terminal PID.
 
 ### III. Team Work
 In order to work efficiently, we decided to create a **Discord** group. The purpose of this group is to discuss problems and solutions, but also to distribute tasks to each member and ensure follow-up for successful collaboration.

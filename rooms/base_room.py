@@ -1,3 +1,7 @@
+"""
+base_room.py:
+Common base class that defines shared room behavior and default interactions.
+"""
 class BaseRoom:
     def __init__(self, name, description, items=None):
         """
