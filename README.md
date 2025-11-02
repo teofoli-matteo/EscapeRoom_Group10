@@ -2,7 +2,7 @@
 **Teofoli Matteo**  
 Contributions: `Player`, `Game Engine`, `Logger`, `Lobby`, `SOC Room`, and `Final Gate Room`.\
 **Nwaoyibo Chiamaka**  
-Contributions: `Game`, `Vault Corridor`, and `Malware Room`, 
+Contributions: `Game`, `Vault Corridor`, and `Malware Room`, \
 **Kong Phil**  
 Contributions: `Game`, `Base Room`, `DNS Closet Room` and `Malware Room`.
 
