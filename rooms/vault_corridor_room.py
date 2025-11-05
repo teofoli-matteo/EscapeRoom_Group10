@@ -2,7 +2,7 @@
 to parse a vault dump file and extract a valid SAFE code.
 """
 import re
-from base_room import BaseRoom
+from rooms.base_room import BaseRoom
 
 class VaultCorridorRoom(BaseRoom):
     """

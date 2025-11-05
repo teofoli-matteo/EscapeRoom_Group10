@@ -3,7 +3,7 @@ dns_closet_room.py:
 Decode DNS hints and recover the DNS token.
 """
 import base64
-from base_room import BaseRoom
+from rooms.base_room import BaseRoom
 
 class DnsClosetRoom(BaseRoom):
     """Room logic for decoding DNS hints."""
