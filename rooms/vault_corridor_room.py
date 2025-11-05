@@ -37,8 +37,8 @@ class VaultCorridorRoom(BaseRoom):
         for a_str, b_str, c_str in matches:
             a, b, c = int(a_str), int(b_str), int(c_str)
             if a + b == c:
-                valid_token = f"SAFE{{{a}--{b}--{c}}}"
-                match_str = f"SAFE{{{a}--{b}--{c}}}"
+                valid_token = f"SAFE{{{a}-{b}-{c}}}"
+                match_str = f"SAFE{{{a}-{b}-{c}}}"
                 check_expr = f"{a} + {b} == {c}"
                 break
 
