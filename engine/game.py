@@ -91,6 +91,10 @@ class Game:
                 if action == "use":
                     self._handle_use(args)
                     continue
+                
+                if action == "hint":
+                    self._handle_hint()
+                    continue
 
                 print("Unknown command.")
 
@@ -162,3 +166,19 @@ class Game:
             print(f"[Game] Save file not found: {filename}")
         except (OSError, json.JSONDecodeError) as err:
             print(f"[Game] Failed to load: {err}")
+            
+    def _handle_hint(self) -> None:
+        """
+        Handle the 'hint' command.
+        """
+        room_name = getattr(self.current_room, 'name', "").lower()
+
+        if room_name == "final gate":
+            print("[Hint] to attempt to open the gate, use : use gate")
+            return
+
+        rooms_items = getattr(self.current_room, "items", [])
+        if rooms_items:
+            print(f"[Hint] Try inspecting the items in this room: {', '.join(rooms_items)}")
+        else:
+            print("[Hint] There is nothing here.")
