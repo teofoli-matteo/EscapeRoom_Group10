@@ -79,7 +79,7 @@ class DnsClosetRoom(BaseRoom):
             return "No valid token found in dns.cfg."
 
         decoded_line = hints[token_key].strip()
-        token_word = decoded_line.split()[-1]
+        token_word = decoded_line.split()[-1].strip(".,!?;:")
 
         player.add_token("DNS", token_word)
 

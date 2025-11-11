@@ -45,13 +45,11 @@ class VaultCorridorRoom(BaseRoom):
         if valid_token is None:
             return "No valid SAFE code found."
         
-        token_value = f"{a}-{b}-{c}"
+        token_value = f"{a}-{b}-{c}"  
         player.add_token("SAFE", token_value)
-
-
-        player.add_token("SAFE", valid_token)
-        logger.log(f"TOKEN[SAFE]={token_value}")
+        logger.log(f"TOKEN[SAFE]={token_value}")  
         logger.log(f'EVIDENCE[SAFE].MATCH="SAFE{{{a}-{b}-{c}}}"')
         logger.log(f"EVIDENCE[SAFE].CHECK={a}+{b}={c}")
-        return f"Token extracted: {valid_token}"
-            
+
+        return f"Token extracted: {token_value}"
+                    

